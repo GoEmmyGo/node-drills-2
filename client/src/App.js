@@ -5,7 +5,7 @@ import axios from 'axios';
 function App() {
 
   const [input, setInput] = useState('');
-  const [serverInfo, setServerInfo] = useState([]);
+  const [serverinput, setServerinput] = useState([]);
 
   function handleInput(e) {
     setInput(e.target.value);
@@ -14,11 +14,11 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios.post('http://localhost:3035/api/info', {
+    axios.post('http://localhost:3035/api/input', {
       text: input
     })
     .then(res => {
-      setServerInfo(res.data);
+      setServerinput(res.data);
     })
     .catch(err => {
       console.log(err);
@@ -30,10 +30,10 @@ function App() {
 
  useEffect(() => {
    
-  axios.get('http://localhost:3035/api/info')
+  axios.get('http://localhost:3035/api/input')
   .then(res => {
     console.log('RES', res.data)
-    setServerInfo(res.data);
+    setServerinput(res.data);
   })
   .catch(err => {
     console.log(err);
@@ -42,7 +42,7 @@ function App() {
  }, [input]);
 
  function handleComponents() {
-   return serverInfo.map((item, index) => {
+   return serverinput.map((item, index) => {
      return (
        <div key={index}>
          <h1>{item.text}</h1>

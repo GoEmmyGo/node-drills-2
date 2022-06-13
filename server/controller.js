@@ -12,13 +12,13 @@ const sequelize = new Sequelize(process.env.CONNECTION_STRING, {
 })
 
 module.exports = {
-    getInfo: (req, res) => {
-        sequelize.query('select * from INFO;')
-            .then(db(dbRes => res.status(200).send(dbRes[0])))
+    getinput: (req, res) => {
+        sequelize.query('SELECT * FROM input;')
+            .then(dbRes => res.status(200).send(dbRes[0]))
             .catch(err => console.log('GETTING',err))
     },
 
-    addInfo: (req, res) => {
+    addinput: (req, res) => {
         let {text} = req.body
 
         sequelize.query(`insert into input (text) values ('${text}');`)
